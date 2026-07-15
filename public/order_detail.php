@@ -6,9 +6,7 @@ require_once __DIR__ . '/../includes/functions.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-/* ============================
-   ENFORCE BUYER-ONLY ACCESS
-============================ */
+/* ENFORCE BUYER-ONLY ACCESS */
 require_buyer_only($conn);
 
 $order_id = (int)($_GET['id'] ?? 0);
@@ -19,9 +17,7 @@ if ($order_id <= 0) {
 
 $buyer_id = (int)$_SESSION['user_id'];
 
-/* =============================
-   LOAD ORDER
-============================= */
+/* LOAD ORDER */
 $stmt = mysqli_prepare($conn, "
   SELECT o.order_id, o.order_status, o.total_amount, o.created_at,
          p.payment_method, p.payment_status
@@ -41,9 +37,7 @@ if (!$order) {
   redirect('/public/my_orders.php');
 }
 
-/* =============================
-   LOAD ITEMS
-============================= */
+/* LOAD ITEMS */
 $stmt = mysqli_prepare($conn, "
   SELECT oi.quantity, oi.unit_price, oi.line_total, oi.item_status,
          pr.title,

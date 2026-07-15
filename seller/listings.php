@@ -17,9 +17,7 @@ $seller_id = (int)($_SESSION['user_id'] ?? 0);
 $success = "";
 $errors = [];
 
-/* ---------------------------
-   DELETE LISTING (and image)
----------------------------- */
+/* DELETE LISTING (and image) */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete') {
   check_csrf();
   $product_id = (int)($_POST['product_id'] ?? 0);
@@ -63,9 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
   }
 }
 
-/* ---------------------------
-   FETCH SELLER LISTINGS
----------------------------- */
+/* FETCH SELLER LISTINGS */
 $stmt = mysqli_prepare(
   $conn,
   "SELECT product_id, title, price, stock, product_condition, status, created_at, image_path

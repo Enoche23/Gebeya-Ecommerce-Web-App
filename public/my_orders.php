@@ -6,9 +6,7 @@ require_once __DIR__ . '/../includes/functions.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-/* ============================
-   ENFORCE BUYER-ONLY ACCESS
-============================ */
+/* ENFORCE BUYER-ONLY ACCESS */
 require_buyer_only($conn);
 
 $buyer_id = (int)$_SESSION['user_id'];

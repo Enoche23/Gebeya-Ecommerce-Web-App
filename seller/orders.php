@@ -9,9 +9,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 
 $seller_id = (int)$_SESSION['user_id'];
 
-/* ============================
-   UPDATE STATUS
-============================ */
+/* UPDATE STATUS */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update_status') {
   check_csrf();
 
@@ -41,9 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
 
 require_once __DIR__ . '/../includes/header.php';
 
-/* ============================
-   LOAD SELLER ORDER ITEMS
-============================ */
+/* LOAD SELLER ORDER ITEMS */
 $stmt = mysqli_prepare($conn, "
   SELECT oi.order_item_id, oi.order_id, oi.quantity, oi.line_total, oi.item_status,
          o.created_at,

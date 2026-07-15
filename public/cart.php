@@ -6,16 +6,12 @@ require_once __DIR__ . '/../includes/functions.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-/* ============================
-   ENFORCE BUYER-ONLY ACCESS
-============================ */
+/* ENFORCE BUYER-ONLY ACCESS */
 require_buyer_only($conn);
 
 if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
 
-/* ============================
-   HANDLE ACTIONS
-============================ */
+/* HANDLE ACTIONS */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $action = $_POST['action'] ?? '';
 
@@ -57,9 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once __DIR__ . '/../includes/header.php';
 
-/* ============================
-   LOAD CART PRODUCTS
-============================ */
+/* LOAD CART PRODUCTS */
 $cart = $_SESSION['cart'];
 $product_rows = [];
 $total = 0.0;

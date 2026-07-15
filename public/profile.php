@@ -13,9 +13,7 @@ $errors = [];
 $edit = ((int)($_GET['edit'] ?? 0) === 1);        // edit profile section
 $addr_edit = ((int)($_GET['addr'] ?? 0) === 1);  // manage addresses section
 
-/* ============================
-   UPDATE PROFILE (NAME + PHONE)
-============================ */
+/* UPDATE PROFILE (NAME + PHONE) */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update_profile') {
   check_csrf();
   $full_name = trim($_POST['full_name'] ?? '');
@@ -39,9 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
   }
 }
 
-/* ============================
-   ADD ADDRESS
-============================ */
+/* ADD ADDRESS */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_address') {
   check_csrf();
   $label = trim($_POST['label'] ?? 'Home');
@@ -70,9 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_a
   }
 }
 
-/* ============================
-   DELETE ADDRESS
-============================ */
+/* DELETE ADDRESS */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete_address') {
   check_csrf();
   $address_id = (int)($_POST['address_id'] ?? 0);
@@ -87,9 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
   }
 }
 
-/* ============================
-   LOAD USER
-============================ */
+/* LOAD USER */
 $u_stmt = mysqli_prepare($conn, "
   SELECT full_name, email, phone, status, created_at
   FROM users
@@ -101,9 +93,7 @@ $u_res = mysqli_stmt_get_result($u_stmt);
 $user = mysqli_fetch_assoc($u_res);
 mysqli_stmt_close($u_stmt);
 
-/* ============================
-   LOAD ADDRESSES
-============================ */
+/* LOAD ADDRESSES */
 $a_stmt = mysqli_prepare($conn, "
   SELECT address_id, label, city, street, house_no, postal_code, created_at
   FROM addresses
@@ -159,9 +149,7 @@ require_once __DIR__ . '/../includes/header.php';
 
       <div class="hr"></div>
 
-      <!-- =========================
-           PROFILE SECTION
-      ========================== -->
+      <!-- PROFILE SECTION -->
       <h2 style="margin:0 0 10px;">Account</h2>
 
       <?php if (!$edit): ?>
@@ -229,9 +217,7 @@ require_once __DIR__ . '/../includes/header.php';
 
       <div class="hr"></div>
 
-      <!-- =========================
-           ADDRESSES SECTION
-      ========================== -->
+      <!-- ADDRESSES SECTION -->
       <div class="form-row" style="align-items:center;">
         <h2 style="margin:0;">Addresses</h2>
         <!-- <?php if (!$addr_edit): ?>
